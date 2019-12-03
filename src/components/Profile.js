@@ -127,7 +127,7 @@ const Profile = props => {
   const classes = useStyles();
 
 
-    console.log(props.user.username)
+    
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
