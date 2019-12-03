@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import DateFnsUtils from '@date-io/date-fns';
+import { format, compareAsc } from 'date-fns'
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
@@ -22,20 +23,11 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Dashboard from "./Dashboard";
 import {plants} from '../reducers/plants'
 
+//components
+import Copyright from './Copyright'
 
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Water My Plants
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -93,27 +85,19 @@ const AddPlantWater = props => {
 
   const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
 
-  const [plant, setPlant] = useState({
-    name: "",
-    location: "",
-    type: "",
-    id: props.match.params.id,
-  });
-
   const [water, setWater] = useState({
     plant_id: props.match.params.id,
+
     water_schedule: JSON.stringify(selectedDate)
+
   })
 
 
 
   const handleDateChange = date => {
-    setSelectedDate(date);
+    setWater(date);
   };
-  const handlerChange = event => {
-    event.preventDefault();
-    setPlant({ ...water, [event.target.name]: event.target.value });
-  };
+
   const submitHandler = event => {
     event.preventDefault();
     props.createPlantSchedule(water)

@@ -9,7 +9,7 @@ import { deletePlant } from '../actions/plants'
 import { connect } from "react-redux";
 
 function DeleteMyPlant(id, props) {
-    const [state, setState] = React.useState(id)
+  const [state, setState] = React.useState(id)
 
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {

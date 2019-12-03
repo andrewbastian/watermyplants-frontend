@@ -142,7 +142,7 @@ export const getPlantSchedule = (props) => dispatch => {
       type: FETCH_PLANT_SCHEDULE_SUCCESS,
       payload: response.data
     })
-  
+
     )
     .catch(error => {
       dispatch({
