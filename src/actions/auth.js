@@ -3,11 +3,11 @@ import API from "../utils/API";
 
 export const LOGOUT_USER='LOGOUT_USER'
 
-export function logoutUser () {
+export function logoutUser (history) {
   return dispatch =>{
     dispatch({type: LOGOUT_USER});
     localStorage.removeItem('token')
-    dispatch(push('/login'))
+    history.push('/login')
   }
 }
 

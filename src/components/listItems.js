@@ -48,7 +48,7 @@ function MainListItems(props) {
     </ListItem>
     </Link>
 
-    <ListItem button onClick = {handleLogout}>
+    <ListItem button onClick = {()=> handleLogout(props.history)}>
       <ListItemIcon>
         <MeetingRoomIcon />
       </ListItemIcon>
