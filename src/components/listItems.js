@@ -61,8 +61,8 @@ function MainListItems(props) {
       <ListItemText primary="Add a plant" />
     </ListItem>
     </Link>
-    
-    <ListItem button onClick = {handleLogout}>
+
+    <ListItem button onClick = {()=> handleLogout(props.history)}>
       <ListItemIcon>
         <MeetingRoomIcon />
       </ListItemIcon>

@@ -17,6 +17,7 @@ import DeleteMyPlant from  "./DeletePlant"
 import EditPlant from "./EditPlant"
 import {Route, Link} from "react-router-dom"
 import {getPlantSchedule} from "../actions/plants"
+import Moment from 'moment'
 
 const useStyles = makeStyles({
   card: {
@@ -28,7 +29,14 @@ function PlantCard(props) {
     props.getPlantSchedule(props.id)
   })
   const classes = useStyles();
-  console.log(props.waterSchedule)
+
+
+  Moment.locale('en');
+  var dt = props.waterSchedule.water_schedule;
+
+
+
+
   return (
 
     <div className="items-list-wrapper">
@@ -47,7 +55,7 @@ function PlantCard(props) {
             {props.plant.name}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-         <AccessTimeIcon color="primary" fontSize="small" /> {props.waterList}  <LocalDrinkIcon color="primary" fontSize="small" /> 3oz.
+         <AccessTimeIcon color="primary" fontSize="small" /> {Moment(dt).format('hh:mm')}
             </Typography>
           </CardContent>
         </CardActionArea>
