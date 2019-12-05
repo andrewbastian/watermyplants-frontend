@@ -12,7 +12,7 @@ export default function configureStore(preloadedState) {
   const store = createStore(
     rootReducer(history),
     preloadedState,
-    applyMiddleware(routerMiddleware(history), thunk, logger)
+    applyMiddleware(routerMiddleware(history), thunk)
   );
 
   return store;

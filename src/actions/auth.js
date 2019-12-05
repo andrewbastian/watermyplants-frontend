@@ -15,7 +15,7 @@ export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
-export function authenticateUser (userData , props) {
+export function authenticateUser (userData , history) {
 
   return dispatch => {
     dispatch({ type: LOGIN_REQUEST });
@@ -26,7 +26,8 @@ export function authenticateUser (userData , props) {
       localStorage.setItem("userID", response.data.id)
       localStorage.setItem("username", response.data.username)
       dispatch({type: LOGIN_SUCCESS, payload: response.data})
-      dispatch(push("/dashboard"));
+      // dispatch(push("/dashboard"));
+      history.push('/dashboard')
     })
     .catch(error =>
       dispatch({

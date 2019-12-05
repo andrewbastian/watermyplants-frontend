@@ -18,9 +18,10 @@ import { connect } from 'react-redux'
 
 function MainListItems(props) {
 
-  const handleLogout = event => {
+  const handleLogout = (event ) => {
     event.preventDefault()
-    props.logoutUser()
+    props.logoutUser(props.history)
+    console.log("logout props: ", props)
   }
 
   return(
@@ -48,7 +49,7 @@ function MainListItems(props) {
     </ListItem>
     </Link>
 
-    <ListItem button onClick = {()=> handleLogout(props.history)}>
+    <ListItem button onClick = {(e)=> handleLogout(e)}>
       <ListItemIcon>
         <MeetingRoomIcon />
       </ListItemIcon>

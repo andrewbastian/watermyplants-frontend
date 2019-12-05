@@ -184,7 +184,7 @@ console.log(props)
           </IconButton>
         </div>
 
-        <MainListItems/>
+        <MainListItems history={props.history}/>
 </Drawer>
 
       <main className={classes.content}>

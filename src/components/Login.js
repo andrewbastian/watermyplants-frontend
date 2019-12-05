@@ -68,7 +68,8 @@ const Login = props => {
   };
   const submitHandler = event => {
     event.preventDefault();
-    props.authenticateUser(user)
+    props.authenticateUser(user, props.history)
+    console.log("login props: ", props)
     console.log(user)
   };
 
