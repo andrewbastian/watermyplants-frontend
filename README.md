@@ -1,4 +1,16 @@
-API TESTED ENDPOINTS
+# WATER MY PLANTS - 
+
+[A WEB APP](https://watermeplease.netlify.app/)
+
+## Tech Stack:
+
+> Authentication - JWT
+> State management - Redux (react-redux, redux-form-material-ui, redux-logger, redux-thunk)
+> Style: Material-UI
+> Form management: material-ui-phone-number, moment, date-fns
+> HTTP client: Axios
+
+## API TESTED ENDPOINTS
 ____________________________________
 //LOGIN -- .post("https://watermp.herokuapp.com/login")
 {
