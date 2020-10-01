@@ -3,11 +3,11 @@ import API from "../utils/API";
 
 export const LOGOUT_USER='LOGOUT_USER'
 
-export function logoutUser () {
+export function logoutUser (history) {
   return dispatch =>{
     dispatch({type: LOGOUT_USER});
     localStorage.removeItem('token')
-    dispatch(push('/login'))
+    history.push('/login')
   }
 }
 
@@ -15,7 +15,7 @@ export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
-export function authenticateUser (userData , props) {
+export function authenticateUser (userData , props, history) {
 
   return dispatch => {
     dispatch({ type: LOGIN_REQUEST });
@@ -26,7 +26,7 @@ export function authenticateUser (userData , props) {
       localStorage.setItem("userID", response.data.id)
       localStorage.setItem("username", response.data.username)
       dispatch({type: LOGIN_SUCCESS, payload: response.data})
-      dispatch(push("/dashboard"));
+      history.push("/dashboard");
     })
     .catch(error =>
       dispatch({
@@ -40,13 +40,13 @@ export const REGISTER_REQUEST = "REGISTER_REQUEST";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILURE = "REGISTER_FAILURE";
 
-export const registerUser = (userData) => dispatch => {
+export const registerUser = (userData, history) => dispatch => {
   dispatch({ type: REGISTER_REQUEST });
 
   API().post("/register", userData)
     .then(response => {
       dispatch({ type: REGISTER_SUCCESS, payload: response.data });
-      dispatch(push("/login"));
+      (history.push("/login"));
     })
     .catch(error =>
       dispatch({
@@ -62,13 +62,13 @@ export const UPDATE_PHONE_REQUEST = "UPDATE_PHONE_REQUEST";
 export const UPDATE_PHONE_SUCCESS = "UPDATE_PHONE_SUCCESS";
 export const UPDATE_PHONE_FAILURE = "UPDATE_PHONE_FAILURE";
 
-export const updatePhone = (phone, props) => dispatch => {
+export const updatePhone = (phone, props, history) => dispatch => {
   dispatch({ type: UPDATE_PHONE_REQUEST });
 
   API().put(`/dashboard/${ID}/user_settings`, phone)
     .then(response => {
       dispatch({ type: UPDATE_PHONE_SUCCESS, payload: response.data });
-      dispatch(push('/'));
+      history.push('/');
     })
     .catch(error => {
       dispatch({

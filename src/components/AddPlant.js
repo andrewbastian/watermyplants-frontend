@@ -78,20 +78,15 @@ const AddPlant = props => {
   const classes = useStyles();
   console.log(props)
 
-  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
 
   const [plant, setPlant] = useState({
     name: "",
     location: "",
     type: "",
-    water_schedule: selectedDate
   });
 
 
 
-  const handleDateChange = date => {
-    setSelectedDate(date);
-  };
   const handlerChange = event => {
     event.preventDefault();
     setPlant({ ...plant, [event.target.name]: event.target.value });
@@ -167,22 +162,6 @@ const AddPlant = props => {
 
 
 
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <KeyboardTimePicker
-            variant="standard"
-            margin="normal"
-            required="true"
-            fullWidth
-            id="h20Frequency"
-            label="h20Frequency"
-            value={selectedDate}
-            onChange={handleDateChange}
-            KeyboardButtonProps={{
-              'aria-label': 'change time',
-            }}
-            />
-        </MuiPickersUtilsProvider>
-
           <Box
             text="Back to Dashboard"
             color="white"
@@ -192,13 +171,14 @@ const AddPlant = props => {
             left="100%"
             zIndex="tooltip"
           >
+
             <StyledButton
               type="submit"
               variant="contained"
               color="inherited"
               className={classes.submit}
             >
-              Save
+              Schedule water time
           </StyledButton>
           </Box>
         </form>

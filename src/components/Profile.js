@@ -2,24 +2,40 @@ import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
+import { authenticateUser } from "../actions/auth";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+import IconButton from "@material-ui/core/IconButton";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 import PersonIcon from "@material-ui/icons/Person";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import PhoneIcon from "@material-ui/icons/Phone";
-import MuiPhoneNumber from 'material-ui-phone-number'
+import EmailIcon from "@material-ui/icons/Email";
+import Fab from "@material-ui/core/Fab";
 
-import {updatePhone} from '../actions/index'
-
-//components
-import Copyright from './Copyright'
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {"Copyright © "}
+      <Link color="inherit" href="https://material-ui.com/">
+        Water My Plants
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -27,6 +43,7 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.common.white
     }
   },
+  
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
@@ -84,51 +101,60 @@ const StyledFab = withStyles({
   }
 })(Button);
 
-
-const StyledButton = withStyles({
+const StyledFab2 = withStyles({
   root: {
     background: "#078B75",
-    borderRadius: 3,
     border: 0,
     color: "white",
-    height: 48,
+    height: 30,
+    width: 55,
+    padding: "0 30px",
+    boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)"
+  }
+})(Button);
+const StyledFab3 = withStyles({
+  root: {
+    background: "#078B75",
+    border: 0,
+    color: "white",
+    height: 30,
+    width: 85,
     padding: "0 30px",
     boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)"
   }
 })(Button);
 
 const Profile = props => {
-
-  const [phone, setPhone] = useState({
-    phone: "",
-  });
-
-
-
-  const handlePhoneChange = value => {
-    setPhone({ ...phone, phone:value })
-    console.log('phone change', phone);
-  }
-
-  const submitHandler = event => {
-    event.preventDefault();
-    props.updatePhone(phone)
-    alert('you changed your number')
-  };
-
   const classes = useStyles();
 
+
+    
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <Box p={2} position="absolute" top={100} left="10.5%" zIndex="tooltip">
+      <Link to="/dashboard">
+        <Box
+          text="Back to Dashboard"
+          color="white"
+          p={2}
+          position="absolute"
+          top={15}
+          left="10%"
+          zIndex="tooltip"
+        >
+          <StyledFab>
+            <ArrowBackIcon />
+          </StyledFab>
+        </Box>
+      </Link>
+      <Box p={2} position="absolute" top={200} left="40.5%" zIndex="tooltip">
         <StyledCard className={classes.card}>
           <ListItem>
             <ListItemIcon>
               <PersonIcon />
             </ListItemIcon>
-            <ListItemText primary={`change your number`} />
-
+            <ListItemText primary={`Hello `} />
+            {/* ${props.user.username} */}
           </ListItem>
           <ListItem>
             <ListItemIcon>
@@ -136,50 +162,28 @@ const Profile = props => {
             </ListItemIcon>
             <ListItemText primary={`123-456-789`} />
           </ListItem>
-          <form className={classes.form} onSubmit={submitHandler} noValidate>
-          <MuiPhoneNumber
-              defaultCountry={'us'}
-              variant="outlined"
-              margin="normal"
-              required="true"
-              fullWidth
-              name="phone"
-              label="Phone"
-              type="phone"
-              value={props.phone}
-              id="phone"
-              autoComplete="phone-password"
-              onChange={handlePhoneChange}
-            />
-          <Box p={4} top='30%' left="2.5%" zIndex="tooltip">
-            <StyledButton
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="white"
-              className={classes.submit}
-            >
-              Change Phone Number
-            </StyledButton>
-            <Link to="/dashboard">
-              <Box
-                text="Back to Dashboard"
-                color="white"
-                p={2}
-                position="absolute"
-                top='75%'
-                left="10%"
-                zIndex="tooltip"
-              >
-                <StyledFab>
-                  <ArrowBackIcon />
-                </StyledFab>
-              </Box>
-            </Link>
+          <ListItem>
+            <ListItemIcon>
+              <EmailIcon />
+            </ListItemIcon>
+            <ListItemText primary={`@watermyplants.tech`} />
+            {/* ${props.user.username} */}
+          </ListItem>
+          <CardContent>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga
+              magni vero adipisci quae recusandae aspernatur sapiente, fugit
+              deleniti neque consectetur nulla doloremque et provident. Eaque
+              excepturi inventore facilis impedit magni?
+            </Typography>
+          </CardContent>
+          <Box p={2} position="absolute" top={460} left="2.5%" zIndex="tooltip">
+            <StyledFab3>
+              Edit
+              <EditIcon />
+            </StyledFab3>
           </Box>
-          </form>
         </StyledCard>
-
       </Box>
       <Box mt={100}>
         <Copyright />
@@ -195,8 +199,5 @@ function mapStateToProps(state) {
   };
 }
 
-const mapDispatchToProps = {
-  updatePhone
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(mapStateToProps, null)(Profile);

@@ -3,13 +3,14 @@ import * as actions from "../actions";
 
 const initialState = {
   plantList: [],
+  waterList: [],
   currentPlant: {
     id: undefined,
     name: "",
     location: "",
     type: "",
     // can we put an object in here?
-    water_schedule: {},
+    water_schedule: '',
     user_id: undefined
   },
   isFetchingPlants: false,
@@ -102,10 +103,8 @@ export const plantScheduleReducer = (state = initialState, action) => {
     case actions.FETCH_PLANT_SCHEDULE_SUCCESS:
       return {
         ...state,
-        isFetchingPlant: false,
-        currentPlant: {
-          water_schedule: action.payload
-        }
+        waterList: [...action.payload],
+        isFetchingPlants: false
       };
 
     case actions.FETCH_PLANT_SCHEDULE_FAILURE:

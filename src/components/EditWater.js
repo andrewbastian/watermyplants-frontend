@@ -80,14 +80,11 @@ const StyledFab = withStyles({
 const EditWater = props => {
   const classes = useStyles();
 
-
-
   const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
-
+  console.log(props.match.params.id)
   const [water, setWater] =useState({
     plant_id: props.match.params.id,
-    water_schedule:'',
-    user_id: props.match.params.id
+    water_schedule: selectedDate
   })
 
   const handleDateChange = date => {

@@ -38,7 +38,7 @@ const App = () => (
           component={EditPlant}
         />
         <PrivateRoute
-          path="/plant/:id/water"
+          path="/plant/:id/water/edit"
           component={EditWater}
         />
 

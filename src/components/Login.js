@@ -79,7 +79,7 @@ const Login = props => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} onSubmit={submitHandler} noValidate>
+        <form className={classes.form} onSubmit= {()=> submitHandler(props.history)} noValidate>
           <TextField
             variant="outlined"
             margin="normal"

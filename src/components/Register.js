@@ -90,7 +90,7 @@ const Register = props => {
         <Typography component="h1" variant="h5">
           Register
         </Typography>
-        <form className={classes.form} onSubmit={submitHandler} noValidate>
+        <form className={classes.form} onSubmit={()=> submitHandler(props.history)} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
