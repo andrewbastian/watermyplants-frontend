@@ -17,9 +17,9 @@ import { Link } from 'react-router-dom'
 
 import { connect } from "react-redux";
 
-import { updatePlant } from '../actions/plants'
+/*import { updatePlant } from '../actions/plants'*/
 
-import {plants} from '../reducers/plants'
+/*import {plants} from '../reducers/plants'*/
 
 import { updatePlantSchedule } from '../actions/'
 
@@ -91,10 +91,10 @@ const EditWater = props => {
     setSelectedDate(date);
   };
 
-  const handlerChange = event => {
+  /*const handlerChange = event => {
     event.preventDefault();
     setWater({ ...water, [event.target.name]: event.target.value });
-  };
+  };*/
   const submitHandler = event => {
     event.preventDefault();
     props.updatePlantSchedule(water)
