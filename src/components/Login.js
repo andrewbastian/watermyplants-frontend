@@ -16,7 +16,6 @@ import { connect } from "react-redux";
 
 import { authenticateUser } from "../actions/auth";
 
-
 //components
 import Copyright from "./Copyright";
 
@@ -71,15 +70,13 @@ const Login = (props) => {
     const submitHandler = (event) => {
         event.preventDefault();
         props.authenticateUser({ ...user });
-        /*console.log(user.username, user.password);*/
-
-        /*console.log({ ...user  });*/
     };
 
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
+            <Typography component="h3"variant="h3" color="primary">Water My Plants</Typography>
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
@@ -141,7 +138,7 @@ const Login = (props) => {
 
 function mapStateToProps(state) {
     return {
-        user: state.user,
+        user: state.auth.user,
     };
 }
 

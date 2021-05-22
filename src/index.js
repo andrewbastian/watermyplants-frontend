@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { Provider } from "react-redux";
-import { AppContainer } from "react-hot-loader";
+import { AppContainer, setConfig } from "react-hot-loader";
 import App from "./App";
 
 import configureStore, { history } from "./configureStore";
@@ -19,7 +19,10 @@ const render = () => {
     );
 };
 
+setConfig({ showReactDomPatchNotification: false });
+
 render();
+
 if (module.hot) {
     module.hot.accept("./App", () => {
         render();

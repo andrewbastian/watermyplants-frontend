@@ -22,14 +22,13 @@ function DeleteMyPlant(id, props) {
     const handleClose = () => {
         setOpen(false);
     };
-    console.log(id);
     const handleDelete = (event) => {
         event.preventDefault();
         id.deletePlant(id);
     };
     return (
         <div>
-            <Button variant="" color="primary" onClick={handleClickOpen}>
+            <Button color="secondary" onClick={handleClickOpen}>
                 Delete
             </Button>
             <Dialog

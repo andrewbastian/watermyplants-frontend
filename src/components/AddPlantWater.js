@@ -75,10 +75,7 @@ const AddPlantWater = (props) => {
     const classes = useStyles();
     console.log(props.match.params.id);
 
-    const [selectedDate, setSelectedDate] = useState(
-        new Date("2014-08-18T21:11:54")
-    );
-
+    const selectedDate = new Date("2014-08-18T21:11:54");
     const [water, setWater] = useState({
         plant_id: props.match.params.id,
 

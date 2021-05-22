@@ -5,7 +5,7 @@ import {LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE} from '../actions/auth'
 const initalState = {
   errorMessage: "",
   token: "",
-  user: null,
+  user: "",
 };
 
 export const authReducer = (state = initalState, action) => {

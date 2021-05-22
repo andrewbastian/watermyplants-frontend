@@ -67,24 +67,22 @@ const Register = (props) => {
     });
 
     const handlerChange = (event) => {
-        /*console.log('username and password change',user);*/
         setUser({ ...user, [event.target.name]: event.target.value });
     };
     const handlePhoneChange = (value) => {
         setUser({ ...user, phone: value });
-        /*console.log('phone change', user);*/
     };
 
     const submitHandler = (event) => {
         event.preventDefault();
         props.registerUser({ ...user });
-        /*console.log("REGISTER USER", user)*/
     };
 
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
+                    <Typography component="h3"variant="h3" color="primary">Water My Plants</Typography>
                 <Typography component="h1" variant="h5">
                     Register
                 </Typography>

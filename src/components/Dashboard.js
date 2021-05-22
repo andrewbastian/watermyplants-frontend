@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, forwardRef } from "react";
 
 import clsx from "clsx";
 
-/*Material-UI*/
+import { useSpring, animated } from "react-spring/web.cjs";
+
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import {
     CssBaseline,
@@ -12,20 +13,27 @@ import {
     Typography,
     IconButton,
     Badge,
-    Container,
     Grid,
-} from "@material-ui/core/";
-import {MenuIcon, ChevronLeftIcon, NotificationsIcon} from "@material-ui/icons/Menu";
+    Container,
+    Modal,
+    Backdrop,
+    CardActionArea,
+    Card,
+} from "@material-ui/core";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import MenuIcon from "@material-ui/icons/Menu";
+import NotificationsIcon from "@material-ui/icons/Notifications";
 
-/*REDUX*/
+import PlantCard from "./PlantCard";
+import MainListItems from "./listItems";
+import PlantModal from "./PlantModal";
+
 import { connect } from "react-redux";
 import { getPlants } from "../actions/plants";
 import { getPlantSchedule } from "../actions/plants";
 
 //components
 import Copyright from "./Copyright";
-import MainListItems from "./listItems";
-import PlantCard from "./PlantCard";
 
 const StyledToolBar = withStyles({
     root: {
@@ -115,29 +123,84 @@ const useStyles = makeStyles((theme) => ({
         overflow: "auto",
         flexDirection: "column",
     },
+    modalPaper: {
+        backgroundColor: theme.palette.background.paper,
+        border: "2px solid #000",
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+    },
+    card: {
+        maxWidth: 345,
+    },
+    modal: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+    },
     fixedHeight: {
         height: 240,
     },
 }));
 
+const Fade = forwardRef(function Fade(props, ref) {
+    const { in: modalOpen, children, onEnter, onExited, ...other } = props;
+    const style = useSpring({
+        from: { opacity: 0 },
+        to: { opacity: modalOpen ? 1 : 0 },
+        onStart: () => {
+            if (modalOpen && onEnter) {
+                onEnter();
+            }
+        },
+        onRest: () => {
+            if (!modalOpen && onExited) {
+                onExited();
+            }
+        },
+    });
+
+    return (
+        <animated.div ref={ref} style={style} {...other}>
+            {children}
+        </animated.div>
+    );
+});
+
 function Dashboard(props) {
+
+    const { getPlants } = props
     useEffect(() => {
-        console.log("DASHBOARD PROPS", props);
-        /*console.log("USER PROPS", props.auth)*/
-        props.getPlants();
-    }, []);
-
+        getPlants();
+    }, [getPlants]);
     const classes = useStyles();
-    const [open, setOpen] = useState(true);
 
-    const handleDrawerOpen = () => {
+    /*MODAL:*/
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const [modalID, setModalID] = useState();
+    const handleModalOpen = (plantID) => {
+        setModalID(plantID);
+        setModalOpen(true);
+    };
+    const handleModalClose = () => {
+        setModalOpen(false);
+    };
+    /*DRAWER:*/
+    const [open, setOpen] = useState(false);
+
+    const handleDrawerOpen = (plant) => {
         setOpen(true);
     };
+
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
+    let username = localStorage.getItem("username");
+
+/*-----------------------------------------------------------------------*/
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -165,7 +228,7 @@ function Dashboard(props) {
                         noWrap
                         className={classes.title}
                     >
-                        {props.username} Plants
+                        welcome {username}{" "}
                     </Typography>
                     <IconButton color="inherit">
                         <Badge badgeContent={4} color="secondary">
@@ -195,23 +258,48 @@ function Dashboard(props) {
 
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
+
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
-                        {/* Plant 1 */}
-
                         {props.plants.map((plant) => (
-                            <Grid item lg={4} md={7} xs={10}>
-                                <PlantCard
-                                    key={plant.id}
-                                    id={plant.id}
-                                    plant={plant}
-                                    className={fixedHeightPaper}
-                                />
+                            <Grid key={plant.id} item lg={4} md={7} xs={10}>
+                                <Card className={classes.card}>
+                                    <CardActionArea
+                                        value={plant.id}
+                                        key={plant.id}
+                                        onClick={() =>
+                                            handleModalOpen(plant.id)
+                                        }
+                                    >
+                                        <PlantCard
+                                            key={plant.id}
+                                            id={plant.id}
+                                            plant={plant}
+                                            className={fixedHeightPaper}
+                                        />
+                                    </CardActionArea>
+                                </Card>
                             </Grid>
                         ))}
                     </Grid>
                 </Container>
                 <Copyright />
+                <Modal
+                    className={classes.modal}
+                    open={modalOpen}
+                    onClose={handleModalClose}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={modalOpen}>
+                        <div className={classes.modalPaper}>
+                            <PlantModal modalID={modalID} />
+                        </div>
+                    </Fade>
+                </Modal>
             </main>
         </div>
     );
