@@ -5,10 +5,16 @@
 ## Tech Stack:
 
 > Authentication - JWT
+
 > State management - Redux (react-redux, redux-form-material-ui, redux-logger, redux-thunk)
+
 > Style: Material-UI
+
 > Form management: material-ui-phone-number, moment, date-fns
+
 > HTTP client: Axios
+
+
 
 ## API TESTED ENDPOINTS
 ____________________________________
@@ -56,19 +62,6 @@ ____________________________________
 }
 //DELETE PLANT -- .delete("https://watermp.herokuapp.com/dashboard/(YOUR USER ID)/my_plant/(YOUR PLANT ID)/remove", "Authorization":"token")
 _____________________________________
-
-
-
-
-Ask about:
-
-no token in register object
-
-plant plantReducer object
-
-what is the best logic for the 3ids. how can this be helpful?
-
-How to use props.history.params w/ connected-react-router.
 
 ------------------------------
 actions still needed:

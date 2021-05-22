@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { withStyles } from "@material-ui/core/styles";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -17,9 +17,9 @@ import { Link } from 'react-router-dom'
 
 import { connect } from "react-redux";
 
-import { updatePlant } from '../actions/plants'
+/*import { updatePlant } from '../actions/plants'*/
 
-import {plants} from '../reducers/plants'
+/*import {plants} from '../reducers/plants'*/
 
 import { updatePlantSchedule } from '../actions/'
 
@@ -81,24 +81,22 @@ const EditWater = props => {
   const classes = useStyles();
 
   const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
-  console.log(props.match.params.id)
-  const [water, setWater] =useState({
+  const water={
     plant_id: props.match.params.id,
     water_schedule: selectedDate
-  })
+  }
 
   const handleDateChange = date => {
     setSelectedDate(date);
   };
 
-  const handlerChange = event => {
+  /*const handlerChange = event => {
     event.preventDefault();
     setWater({ ...water, [event.target.name]: event.target.value });
-  };
+  };*/
   const submitHandler = event => {
     event.preventDefault();
     props.updatePlantSchedule(water)
-    console.log(water)
   };
 
   return (

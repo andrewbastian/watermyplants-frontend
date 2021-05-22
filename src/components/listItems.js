@@ -9,68 +9,57 @@ import PersonIcon from "@material-ui/icons/Person";
 import AddIcon from "@material-ui/icons/Add";
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
+import { logoutUser } from "../actions/index";
 
-import { logoutUser } from "../actions/index"
-
-import { connect } from 'react-redux'
-
+import { connect } from "react-redux";
 
 function MainListItems(props) {
+    const handleLogout = (event) => {
+        props.logoutUser();
+    };
 
-  const handleLogout = event => {
-    event.preventDefault()
-    props.logoutUser()
-  }
+    return (
+        <div>
+            <Divider />
+            <List>
+                <Link to="/account">
+                    <ListItem button>
+                        <ListItemIcon>
+                            <PersonIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={`Update Profile`} />
+                    </ListItem>
+                </Link>
 
-  return(
+                <Link to="/plant/add">
+                    <ListItem button>
+                        <ListItemIcon>
+                            <AddIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Add a plant" />
+                    </ListItem>
+                </Link>
 
-    <div>
-    <Divider />
-    <List>
+                <ListItem button onClick={handleLogout}>
+                    <ListItemIcon>
+                        <MeetingRoomIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Log Out" />
+                </ListItem>
+            </List>
 
-    <Link to='/account'>
-    <ListItem button>
-      <ListItemIcon>
-        <PersonIcon />
-      </ListItemIcon>
-      <ListItemText primary={`Update Profile`}/>
-
-    </ListItem>
-  </Link>
-
-    <Link to='/plant/add'>
-    <ListItem button>
-      <ListItemIcon>
-        <AddIcon />
-      </ListItemIcon>
-      <ListItemText primary="Add a plant" />
-    </ListItem>
-    </Link>
-
-    <ListItem button onClick = {()=> handleLogout(props.history)}>
-      <ListItemIcon>
-        <MeetingRoomIcon />
-      </ListItemIcon>
-      <ListItemText primary="Log Out" />
-    </ListItem>
-    </List>
-
-  <Divider />
-  </div>
-
-);
+            <Divider />
+        </div>
+    );
 }
 function mapStateToProps(state) {
-  return {
-    user: state.user,
-  };
+    return {
+        user: state.user,
+    };
 }
 
 const mapDispatchToProps = {
-  logoutUser
+    logoutUser,
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MainListItems);
+export default connect(mapStateToProps, mapDispatchToProps)(MainListItems);

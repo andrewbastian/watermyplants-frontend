@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Box from "@material-ui/core/Box";
@@ -8,21 +8,21 @@ import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-import { authenticateUser } from "../actions/auth";
+/*import { authenticateUser } from "../actions/auth";*/
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import IconButton from "@material-ui/core/IconButton";
+/*import CardActions from "@material-ui/core/CardActions";*/
+/*import IconButton from "@material-ui/core/IconButton";*/
 import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
+/*import DeleteIcon from "@material-ui/icons/Delete";*/
 import PersonIcon from "@material-ui/icons/Person";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import PhoneIcon from "@material-ui/icons/Phone";
 import EmailIcon from "@material-ui/icons/Email";
-import Fab from "@material-ui/core/Fab";
+/*import Fab from "@material-ui/core/Fab";*/
 
 function Copyright() {
   return (
@@ -43,6 +43,7 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.common.white
     }
   },
+  
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
@@ -100,7 +101,7 @@ const StyledFab = withStyles({
   }
 })(Button);
 
-const StyledFab2 = withStyles({
+/*const StyledFab2 = withStyles({
   root: {
     background: "#078B75",
     border: 0,
@@ -110,7 +111,7 @@ const StyledFab2 = withStyles({
     padding: "0 30px",
     boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)"
   }
-})(Button);
+})(Button);*/
 const StyledFab3 = withStyles({
   root: {
     background: "#078B75",
